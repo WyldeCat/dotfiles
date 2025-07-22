@@ -1,10 +1,19 @@
 #!/bin/bash
-set -euo pipefail
+set -xeuo pipefail
 
 INSTALL_DIR="$HOME/.local/bin"
+LINE_TO_ADD="export PATH=\"\$HOME/.local/bin:\$PATH\""
+
+if ! grep -Fxq "$LINE_TO_ADD" "$HOME/.bashrc" && ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
+    echo "$LINE_TO_ADD" >> "$HOME/.bashrc"
+    echo "Added $HOME/.local/bin to PATH in .bashrc"
+else
+    echo "$HOME/.local/bin is already in PATH or .bashrc"
+fi
+
 NVIM_URL=$(curl -s https://api.github.com/repos/neovim/neovim/releases/latest \
     | grep browser_download_url \
-    | grep 'linux64.tar.gz' \
+    | grep 'linux-x86_64.tar.gz' \
     | cut -d '"' -f 4)
 
 TMP_DIR=$(mktemp -d)
@@ -13,8 +22,8 @@ echo "📦 Downloading Neovim from $NVIM_URL"
 curl -L "$NVIM_URL" -o "$TMP_DIR/nvim.tar.gz"
 tar -xzf "$TMP_DIR/nvim.tar.gz" -C "$TMP_DIR"
 
-mkdir -p "$INSTALL_DIR"
-cp "$TMP_DIR"/nvim-linux64/bin/nvim "$INSTALL_DIR/nvim"
+mkdir -p "~/.local"
+cp -r "$TMP_DIR"/nvim-linux-x86_64/* ~/.local
 
 echo "✅ Installed Neovim to $INSTALL_DIR/nvim"
 
