@@ -1,6 +1,8 @@
 #!/bin/bash
 set -xeuo pipefail
 
+mkdir -p ~/.local
+
 INSTALL_DIR="$HOME/.local/bin"
 LINE_TO_ADD="export PATH=\"\$HOME/.local/bin:\$PATH\""
 
