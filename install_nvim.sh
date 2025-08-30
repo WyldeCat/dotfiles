@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xeuo pipefail
 
-mkdir -p ~/.local
+mkdir -p $HOME/.local
 
 INSTALL_DIR="$HOME/.local/bin"
 LINE_TO_ADD="export PATH=\"\$HOME/.local/bin:\$PATH\""
@@ -24,8 +24,7 @@ echo "📦 Downloading Neovim from $NVIM_URL"
 curl -L "$NVIM_URL" -o "$TMP_DIR/nvim.tar.gz"
 tar -xzf "$TMP_DIR/nvim.tar.gz" -C "$TMP_DIR"
 
-mkdir -p "~/.local"
-cp -r "$TMP_DIR"/nvim-linux-x86_64/* ~/.local
+cp -r "$TMP_DIR"/nvim-linux-x86_64/* $HOME/.local
 
 echo "✅ Installed Neovim to $INSTALL_DIR/nvim"
 
