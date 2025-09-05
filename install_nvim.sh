@@ -4,7 +4,7 @@ set -xeuo pipefail
 mkdir -p $HOME/.local
 
 INSTALL_DIR="$HOME/.local/bin"
-LINE_TO_ADD="export PATH=\"\$HOME/.local/bin:\$PATH\""
+LINE_TO_ADD="export PATH=\"\$HOME/.local/bin:\$PATH\"; alias vi='nvim'; alias vim='nvim'"
 
 if ! grep -Fxq "$LINE_TO_ADD" "$HOME/.bashrc" && ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
     echo "$LINE_TO_ADD" >> "$HOME/.bashrc"
