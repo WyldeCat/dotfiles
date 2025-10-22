@@ -26,7 +26,7 @@ end, { desc = 'Set working directory to path of buffer.' })
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()
-    require("lint").try_lint()
+    -- require("lint").try_lint()
   end,
 })
 
