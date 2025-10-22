@@ -34,3 +34,6 @@ if command -v gh > /dev/null 2>&1; then
 else
     ./install_gh.sh
 fi
+
+git config --global user.name WyldeCat
+git config --global user.email skan1543@gmail.com
