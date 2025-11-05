@@ -1,3 +1,4 @@
+./install_dev.sh
 
 if command -v nvim > /dev/null 2>&1; then
     echo "✅ nvim is already installed: $(command -v nvim)"
@@ -35,5 +36,22 @@ else
     ./install_gh.sh
 fi
 
-git config --global user.name WyldeCat
-git config --global user.email skan1543@gmail.com
+if command -v aws > /dev/null 2>&1; then
+    echo "✅ aws is already installed: $(command -v aws)"
+else
+    ./install_aws.sh
+fi
+
+
+echo "=== Git User Configuration ==="
+
+read -rp "Enter your Git username: " username
+read -rp "Enter your Git email: " email
+
+git config --global user.name "$username"
+git config --global user.email "$email"
+
+echo
+echo "Git configuration updated:"
+git config --global user.name
+git config --global user.email
